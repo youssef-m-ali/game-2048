@@ -105,7 +105,7 @@ function move(dir) {
   prevScore = score;
 
   // Map direction to number of CW rotations before sliding left
-  const rotations = { left: 0, up: 1, right: 2, down: 3 }[dir];
+  const rotations = { left: 0, up: 3, right: 2, down: 1 }[dir];
 
   let b = board.map(r => [...r]);
   for (let i = 0; i < rotations; i++) b = rotateBoard(b);
