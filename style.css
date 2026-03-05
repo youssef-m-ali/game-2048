@@ -1,0 +1,228 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #faf8ef;
+  --text: #776e65;
+  --grid-bg: #bbada0;
+  --cell-empty: #cdc1b4;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px 16px 40px;
+  user-select: none;
+}
+
+/* ── Header ── */
+header {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: 'Abril Fatface', serif;
+  font-size: 72px;
+  color: #776e65;
+  line-height: 1;
+}
+
+.score-row {
+  display: flex;
+  gap: 8px;
+}
+
+.score-box {
+  background: #bbada0;
+  border-radius: 6px;
+  padding: 6px 16px;
+  text-align: center;
+  min-width: 70px;
+}
+
+.score-box .label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #eee4da;
+  letter-spacing: 1px;
+}
+
+.score-box .value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  transition: transform 0.1s;
+}
+
+.score-box .value.bump {
+  animation: scoreBump 0.2s ease;
+}
+
+@keyframes scoreBump {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* ── Controls ── */
+.controls {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.tagline {
+  font-size: 14px;
+  color: #776e65;
+  font-weight: 700;
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  background: #8f7a66;
+  color: #f9f6f2;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+button:hover  { background: #9f8a76; }
+button:active { transform: scale(0.96); }
+button:disabled { opacity: 0.45; cursor: default; transform: none; }
+
+/* ── Grid ── */
+.grid-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.grid-bg {
+  background: var(--grid-bg);
+  border-radius: 8px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  aspect-ratio: 1;
+}
+
+.cell {
+  background: var(--cell-empty);
+  border-radius: 4px;
+}
+
+/* ── Tile layer ── */
+.tile-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tile {
+  position: absolute;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  transition: left 0.1s ease, top 0.1s ease;
+  will-change: transform, left, top;
+}
+
+.tile.new-tile   { animation: tileAppear 0.18s ease forwards; }
+.tile.merge-tile { animation: tileMerge 0.2s ease forwards; }
+
+@keyframes tileAppear {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes tileMerge {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.2); }
+  70%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* ── Overlays ── */
+.overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: rgba(238, 228, 218, 0.73);
+  z-index: 100;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  animation: fadeIn 0.4s ease;
+}
+
+.overlay.show { display: flex; }
+
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+.overlay h2 {
+  font-family: 'Abril Fatface', serif;
+  font-size: 52px;
+  color: #776e65;
+}
+
+.overlay p {
+  font-size: 16px;
+  font-weight: 700;
+  color: #776e65;
+}
+
+.overlay .btn-group {
+  display: flex;
+  gap: 12px;
+}
+
+.overlay button {
+  font-size: 16px;
+  padding: 10px 24px;
+}
+
+.overlay.win h2 { color: #f65e3b; }
+
+/* ── Hint ── */
+.hint {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #bbada0;
+  text-align: center;
+  max-width: 500px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 540px) {
+  .title { font-size: 52px; }
+  .grid-bg { padding: 8px; gap: 8px; }
+}

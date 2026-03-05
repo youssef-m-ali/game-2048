@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048</title>
+  <link href="https://fonts.googleapis.com/css2?family=Clear+Sans:wght@400;700&family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="title">2048</div>
+    <div class="score-row">
+      <div class="score-box">
+        <div class="label">Score</div>
+        <div class="value" id="score">0</div>
+      </div>
+      <div class="score-box">
+        <div class="label">Best</div>
+        <div class="value" id="best">0</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="tagline">Join the tiles, get to <strong>2048!</strong></div>
+    <div class="btn-row">
+      <button id="undoBtn" disabled>↩ Undo</button>
+      <button id="newBtn">New Game</button>
+    </div>
+  </div>
+
+  <div class="grid-wrap">
+    <div class="grid-bg" id="gridBg"></div>
+    <div class="tile-layer" id="tileLayer"></div>
+
+    <!-- Game Over overlay -->
+    <div class="overlay" id="gameOverOverlay">
+      <h2>Game Over!</h2>
+      <p>No more moves available.</p>
+      <div class="btn-group">
+        <button onclick="newGame()">Try Again</button>
+      </div>
+    </div>
+
+    <!-- Win overlay -->
+    <div class="overlay win" id="winOverlay">
+      <h2>You Win! 🎉</h2>
+      <p>You reached the 2048 tile!</p>
+      <div class="btn-group">
+        <button onclick="keepGoing()">Keep Going</button>
+        <button onclick="newGame()">New Game</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hint">Use arrow keys or swipe to play. Combine matching tiles to reach 2048!</div>
+
+  <script src="game.js"></script>
+</body>
+</html>
