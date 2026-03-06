@@ -283,6 +283,28 @@ document.addEventListener('touchend', e => {
 document.getElementById('newBtn').addEventListener('click', newGame);
 document.getElementById('undoBtn').addEventListener('click', undo);
 
+// ─── Theme toggle ─────────────────────────────────────────────────────────────
+function updateThemeBtn(theme) {
+  const btn = document.getElementById('themeBtn');
+  const isDark = theme === 'dark';
+  btn.classList.toggle('active', isDark);
+  btn.setAttribute('aria-checked', isDark);
+}
+
+(function initTheme() {
+  const saved = localStorage.getItem('2048theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeBtn(saved);
+})();
+
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('2048theme', next);
+  updateThemeBtn(next);
+});
+
 // Re-render on window resize
 let resizeTimer;
 window.addEventListener('resize', () => {

@@ -5,6 +5,31 @@
   --text: #776e65;
   --grid-bg: #bbada0;
   --cell-empty: #cdc1b4;
+  --score-box-bg: #bbada0;
+  --score-label: #eee4da;
+  --score-value: #fff;
+  --btn-bg: #8f7a66;
+  --btn-text: #f9f6f2;
+  --btn-hover: #9f8a76;
+  --overlay-bg: rgba(238, 228, 218, 0.73);
+  --overlay-text: #776e65;
+  --hint-text: #bbada0;
+}
+
+[data-theme="dark"] {
+  --bg: #1c1814;
+  --text: #f0ebe3;
+  --grid-bg: #4a3f38;
+  --cell-empty: #3d3329;
+  --score-box-bg: #4a3f38;
+  --score-label: #d4c5b8;
+  --score-value: #f0ebe3;
+  --btn-bg: #5c4f47;
+  --btn-text: #f0ebe3;
+  --btn-hover: #6e5f57;
+  --overlay-bg: rgba(28, 24, 20, 0.73);
+  --overlay-text: #f0ebe3;
+  --hint-text: #7a6a60;
 }
 
 body {
@@ -32,7 +57,7 @@ header {
 .title {
   font-family: 'Abril Fatface', serif;
   font-size: 72px;
-  color: #776e65;
+  color: var(--text);
   line-height: 1;
 }
 
@@ -42,7 +67,7 @@ header {
 }
 
 .score-box {
-  background: #bbada0;
+  background: var(--score-box-bg);
   border-radius: 6px;
   padding: 6px 16px;
   text-align: center;
@@ -53,14 +78,14 @@ header {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  color: #eee4da;
+  color: var(--score-label);
   letter-spacing: 1px;
 }
 
 .score-box .value {
   font-size: 22px;
   font-weight: 700;
-  color: #fff;
+  color: var(--score-value);
   transition: transform 0.1s;
 }
 
@@ -86,7 +111,7 @@ header {
 
 .tagline {
   font-size: 14px;
-  color: #776e65;
+  color: var(--text);
   font-weight: 700;
 }
 
@@ -96,8 +121,8 @@ header {
 }
 
 button {
-  background: #8f7a66;
-  color: #f9f6f2;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   border: none;
   border-radius: 6px;
   font-family: inherit;
@@ -108,9 +133,10 @@ button {
   transition: background 0.15s, transform 0.1s;
 }
 
-button:hover  { background: #9f8a76; }
+button:hover  { background: var(--btn-hover); }
 button:active { transform: scale(0.96); }
 button:disabled { opacity: 0.45; cursor: default; transform: none; }
+
 
 /* ── Grid ── */
 .grid-wrap {
@@ -173,7 +199,7 @@ button:disabled { opacity: 0.45; cursor: default; transform: none; }
   position: absolute;
   inset: 0;
   border-radius: 8px;
-  background: rgba(238, 228, 218, 0.73);
+  background: var(--overlay-bg);
   z-index: 100;
   flex-direction: column;
   align-items: center;
@@ -191,13 +217,13 @@ button:disabled { opacity: 0.45; cursor: default; transform: none; }
 .overlay h2 {
   font-family: 'Abril Fatface', serif;
   font-size: 52px;
-  color: #776e65;
+  color: var(--overlay-text);
 }
 
 .overlay p {
   font-size: 16px;
   font-weight: 700;
-  color: #776e65;
+  color: var(--overlay-text);
 }
 
 .overlay .btn-group {
@@ -212,11 +238,66 @@ button:disabled { opacity: 0.45; cursor: default; transform: none; }
 
 .overlay.win h2 { color: #f65e3b; }
 
+/* ── Theme toggle ── */
+.theme-row {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 0 4px;
+}
+
+.theme-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.toggle-switch {
+  position: relative;
+  width: 51px;
+  height: 31px;
+  background: var(--cell-empty);
+  border: none;
+  border-radius: 31px;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+
+.toggle-switch.active {
+  background: #8f7a66;
+}
+
+.toggle-switch:focus-visible {
+  outline: 3px solid #8f7a66;
+  outline-offset: 2px;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition: left 0.25s ease;
+}
+
+.toggle-switch.active .toggle-thumb {
+  left: 22px;
+}
+
 /* ── Hint ── */
 .hint {
   margin-top: 20px;
   font-size: 13px;
-  color: #bbada0;
+  color: var(--hint-text);
   text-align: center;
   max-width: 500px;
 }
